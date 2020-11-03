@@ -221,6 +221,76 @@ RCT_EXPORT_METHOD(getHeartRateVariabilitySamples:(NSDictionary *)input callback:
     [self vitals_getHeartRateVariabilitySamples:input callback:callback];
 }
 
+RCT_EXPORT_METHOD(getFatTotalSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getFatTotalSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getCarbohydratesSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getCarbohydratesSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getCalciumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getCalciumSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getProteinSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getProteinSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getSugarSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getSugarSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getFiberSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getFiberSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getFolateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getFolateSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getIronSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getIronSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getPotassiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getPotassiumSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getFatSaturatedSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getFatSaturatedSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getSodiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getSodiumSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getVitaminASamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getVitaminASamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getVitaminCSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getVitaminCSamples:input callback:callback];
+}
+
+RCT_EXPORT_METHOD(getVitaminDSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
+{
+    [self dietary_getVitaminDSamples:input callback:callback];
+}
+
 RCT_EXPORT_METHOD(getBloodGlucoseSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback)
 {
     [self results_getBloodGlucoseSamples:input callback:callback];

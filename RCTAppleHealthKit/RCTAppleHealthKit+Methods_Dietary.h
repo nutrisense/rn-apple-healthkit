@@ -12,5 +12,19 @@
 
 - (void)saveFood:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 - (void)saveWater:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getFatTotalSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getCarbohydratesSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getCalciumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getSugarSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getFiberSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getFolateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getIronSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getPotassiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getProteinSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getFatSaturatedSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getSodiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getVitaminASamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getVitaminCSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
+- (void)dietary_getVitaminDSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback;
 
 @end

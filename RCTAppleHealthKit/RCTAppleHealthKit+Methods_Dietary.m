@@ -13,6 +13,10 @@
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
 
+@interface RCTAppleHealthKit ()
+    - (void) getTypeSamples;
+@end
+
 @implementation RCTAppleHealthKit (Methods_Dietary)
 
 - (void)saveFood:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
@@ -63,7 +67,7 @@
             HKMetadataKeyFoodType:foodNameValue,
             //@"HKFoodBrandName":@"FoodBrandName", // Restaurant name or packaged food brand name
             //@"HKFoodTypeUUID":@"FoodTypeUUID", // Identifier for this food
-            @"HKFoodMeal":mealNameValue//, // Breakfast, Lunch, Dinner, or Snacks 
+            @"HKFoodMeal":mealNameValue//, // Breakfast, Lunch, Dinner, or Snacks
             //@"HKFoodImageName":@"FoodImageName" // Food icon name
     };
 
@@ -404,6 +408,154 @@
         }
         callback(@[[NSNull null], @true]);
     }];
+}
+
+- (void)dietary_getFatTotalSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryFatTotal
+            errorMessage: @"error getting dietary fat total samples:"
+                callback: callback];
+}
+
+- (void)dietary_getCarbohydratesSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryCarbohydrates
+            errorMessage: @"error getting dietary carbohydrates samples:"
+                callback: callback];
+}
+
+- (void)dietary_getCalciumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryCalcium
+            errorMessage: @"error getting dietary calcium samples:"
+                callback: callback];
+}
+
+- (void)dietary_getSugarSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietarySugar
+            errorMessage: @"error getting dietary sugar samples:"
+                callback: callback];
+}
+
+- (void)dietary_getFiberSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryFiber
+            errorMessage: @"error getting dietary fiber samples:"
+                callback: callback];
+}
+
+- (void)dietary_getFolateSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryFolate
+            errorMessage: @"error getting dietary folate samples:"
+                callback: callback];
+}
+
+- (void)dietary_getIronSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryIron
+            errorMessage: @"error getting dietary iron samples:"
+                callback: callback];
+}
+
+- (void)dietary_getPotassiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryPotassium
+            errorMessage: @"error getting dietary potassium samples:"
+                callback: callback];
+}
+
+- (void)dietary_getProteinSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryProtein
+            errorMessage: @"error getting dietary protein samples:"
+                callback: callback];
+}
+
+- (void)dietary_getFatSaturatedSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryFatSaturated
+            errorMessage: @"error getting dietary fat saturated samples:"
+                callback: callback];
+}
+
+- (void)dietary_getSodiumSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietarySodium
+            errorMessage: @"error getting dietary sodium samples:"
+                callback: callback];
+}
+
+- (void)dietary_getVitaminASamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryVitaminA
+            errorMessage: @"error getting dietary Vitamin A samples:"
+                callback: callback];
+}
+
+- (void)dietary_getVitaminCSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryVitaminC
+            errorMessage: @"error getting dietary Vitamin C samples:"
+                callback: callback];
+}
+
+- (void)dietary_getVitaminDSamples:(NSDictionary *)input callback:(RCTResponseSenderBlock)callback
+{
+    [self getTypeSamples: input
+          typeIdentifier: HKQuantityTypeIdentifierDietaryVitaminD
+            errorMessage: @"error getting dietary Vitamin D samples:"
+                callback: callback];
+}
+
+- (void)getTypeSamples:(NSDictionary *)input
+        typeIdentifier:(HKQuantityTypeIdentifier)typeIdentifier
+          errorMessage:(NSString *)errorMessage
+              callback:(RCTResponseSenderBlock)callback
+{
+    HKQuantityType *dietaryType = [HKQuantityType quantityTypeForIdentifier:typeIdentifier];
+    
+    HKUnit *unit = [HKUnit gramUnit];
+    NSUInteger limit = [RCTAppleHealthKit uintFromOptions:input key:@"limit" withDefault:HKObjectQueryNoLimit];
+    BOOL ascending = [RCTAppleHealthKit boolFromOptions:input key:@"ascending" withDefault:false];
+    NSDate *startDate = [RCTAppleHealthKit dateFromOptions:input key:@"startDate" withDefault:nil];
+    NSDate *endDate = [RCTAppleHealthKit dateFromOptions:input key:@"endDate" withDefault:[NSDate date]];
+    if(startDate == nil){
+        callback(@[RCTMakeError(@"startDate is required in options", nil, nil)]);
+        return;
+    }
+    NSPredicate * predicate = [RCTAppleHealthKit predicateForSamplesBetweenDates:startDate endDate:endDate];
+    
+    // Get the dietary fat total from HealthKit //
+    [self fetchQuantitySamplesOfType:dietaryType
+                                unit:unit
+                           predicate:predicate
+                           ascending:ascending
+                               limit:limit
+                          completion:^(NSArray *results, NSError *error) {
+                              if(results){
+                                  callback(@[[NSNull null], results]);
+                                  return;
+                              } else {
+//                                  NSLog(@"%@", [Util append:errorMessage,, error]);
+                                  callback(@[RCTMakeError(@"something went wrong", nil, nil)]);
+                                  return;
+                              }
+                          }];
 }
 
 @end
